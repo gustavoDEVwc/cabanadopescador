@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121212">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Cabana do Pescador: barracas, equipamentos de pesca, iluminação e utilidades para acampar. Loja fictícia criada para portfólio.">
+    <title>Cabana do Pescador | Equipamento outdoor e camping</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header" id="header">
+        <nav class="nav container" aria-label="Principal">
+            <a href="#inicio" class="nav__logo" aria-label="Cabana do Pescador, ir para o início">
+                <svg class="nav__logo-mark" viewBox="0 0 36 36" aria-hidden="true">
+                    <rect width="36" height="36" rx="2" fill="#ff6a13"/>
+                    <polygon points="18,8 29,27 7,27" fill="#121212"/>
+                    <polygon points="18,16 13.5,27 22.5,27" fill="#ff6a13"/>
+                </svg>
+                <span><strong>Cabana</strong> do Pescador</span>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a href="#inicio" class="nav__link active-link">Início</a></li>
+                    <li><a href="#categorias" class="nav__link">Categorias</a></li>
+                    <li><a href="#faq" class="nav__link">Dúvidas</a></li>
+                    <li><a href="#contato" class="nav__link">Contato</a></li>
+                </ul>
+                <button class="nav__close" id="nav-close" type="button" aria-label="Fechar menu">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="nav__actions">
+                <!-- Etapa 2: este botão vai abrir o carrinho -->
+                <button class="nav__cart" id="cart-toggle" type="button" aria-label="Carrinho, 0 itens">
+                    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                    <span class="nav__cart-count" id="cart-count" aria-hidden="true">0</span>
+                </button>
+                <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="nav__overlay" id="nav-overlay"></div>
+
+    <main>
+        <!-- ==================== HERO ==================== -->
+        <section class="hero" id="inicio">
+            <div class="container hero__container">
+                <div class="hero__content">
+                    <h1 class="hero__title">Equipamento resistente para quem <em>pesca e acampa</em></h1>
+                    <p class="hero__description">Barracas, varas, iluminação e utilidades escolhidas para a beira do rio e para a trilha. Gear que aguenta chuva, lama e fim de semana prolongado.</p>
+                    <div class="hero__buttons">
+                        <a href="#categorias" class="btn btn--primary">Ver categorias <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="#faq" class="btn btn--outline">Tirar dúvidas</a>
+                    </div>
+                </div>
+
+                <svg class="hero__art" viewBox="0 0 560 480" role="img" aria-label="Ilustração de uma barraca de camping e uma vara de pesca ao entardecer">
+                    <g transform="rotate(-14 340 380)">
+                        <ellipse class="art-contour" cx="340" cy="380" rx="300" ry="86"/>
+                        <ellipse class="art-contour" cx="340" cy="380" rx="240" ry="66"/>
+                        <ellipse class="art-contour" cx="340" cy="380" rx="180" ry="46"/>
+                    </g>
+                    <circle class="art-sun" cx="400" cy="105" r="52"/>
+                    <circle class="art-ring" cx="400" cy="105" r="76"/>
+                    <polygon class="art-tent" points="110,380 270,130 430,380"/>
+                    <polygon class="art-tent-shade" points="110,380 270,130 270,380"/>
+                    <polygon class="art-door" points="270,214 230,380 310,380"/>
+                    <line class="art-line" x1="270" y1="130" x2="270" y2="380"/>
+                    <line class="art-line" x1="190" y1="255" x2="60" y2="396"/>
+                    <line class="art-line" x1="350" y1="255" x2="480" y2="396"/>
+                    <line class="art-mark" x1="60" y1="388" x2="60" y2="404"/>
+                    <line class="art-mark" x1="480" y1="388" x2="480" y2="404"/>
+                    <line class="art-line" x1="30" y1="380" x2="530" y2="380"/>
+                    <path class="art-rod" d="M452 380 Q500 230 528 70"/>
+                    <path class="art-fishline" d="M528 70 L528 250"/>
+                    <path class="art-fishline" d="M528 250 q0 14 -12 14"/>
+                    <path class="art-mark" d="M24 24h14M31 17v14"/>
+                    <path class="art-mark" d="M522 444h14M529 437v14"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ==================== CATEGORIAS ==================== -->
+        <!-- Etapa 2: a vitrine de produtos (#vitrine) entra logo abaixo desta seção -->
+        <section class="categorias section" id="categorias">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Escolha pelo que você vai fazer</h2>
+                    <p class="section__description">Seis categorias cobrem do acampamento à beira d'água. Comece por onde o seu fim de semana começa.</p>
+                </div>
+
+                <div class="categorias__container">
+                    <a href="#vitrine" class="categoria__card categoria__card--wide" data-category="barracas">
+                        <i class="categoria__icon fa-solid fa-campground" aria-hidden="true"></i>
+                        <h3 class="categoria__title">Barracas e abrigos</h3>
+                        <p class="categoria__description">Barracas, tarps e redes para dormir bem em qualquer terreno.</p>
+                        <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                    <a href="#vitrine" class="categoria__card" data-category="pesca">
+                        <i class="categoria__icon fa-solid fa-fish" aria-hidden="true"></i>
+                        <h3 class="categoria__title">Pesca</h3>
+                        <p class="categoria__description">Varas, molinetes, iscas e acessórios para água doce.</p>
+                        <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                    <a href="#vitrine" class="categoria__card" data-category="iluminacao">
+                        <i class="categoria__icon fa-solid fa-lightbulb" aria-hidden="true"></i>
+                        <h3 class="categoria__title">Iluminação</h3>
+                        <p class="categoria__description">Lanternas e faróis recarregáveis para a noite no acampamento.</p>
+                        <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                    <a href="#vitrine" class="categoria__card" data-category="mochilas">
+                        <i class="categoria__icon fa-solid fa-mountain" aria-hidden="true"></i>
+                        <h3 class="categoria__title">Mochilas e bolsas</h3>
+                        <p class="categoria__description">Cargueiras e bolsas estanques para a carga seca.</p>
+                        <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                    <a href="#vitrine" class="categoria__card" data-category="cozinha">
+                        <i class="categoria__icon fa-solid fa-fire" aria-hidden="true"></i>
+                        <h3 class="categoria__title">Cozinha de camping</h3>
+                        <p class="categoria__description">Fogareiros, panelas e utensílios compactos.</p>
+                        <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                    <a href="#vitrine" class="categoria__card categoria__card--wide" data-category="ferramentas">
+                        <i class="categoria__icon fa-solid fa-toolbox" aria-hidden="true"></i>
+                        <h3 class="categoria__title">Facas e ferramentas</h3>
+                        <p class="categoria__description">Facas, machadinhas e kits de reparo para resolver o imprevisto no mato.</p>
+                        <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BENEFÍCIOS ==================== -->
+        <section class="beneficios" id="beneficios" aria-label="Vantagens da loja">
+            <div class="container beneficios__container">
+                <div class="beneficio__item">
+                    <i class="beneficio__icon fa-solid fa-truck-fast" aria-hidden="true"></i>
+                    <div>
+                        <h3 class="beneficio__title">Envio para o Brasil</h3>
+                        <p class="beneficio__text">Prazo e frete calculados no carrinho</p>
+                    </div>
+                </div>
+                <div class="beneficio__item">
+                    <i class="beneficio__icon fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    <div>
+                        <h3 class="beneficio__title">Compra segura</h3>
+                        <p class="beneficio__text">Pagamento protegido do início ao fim</p>
+                    </div>
+                </div>
+                <div class="beneficio__item">
+                    <i class="beneficio__icon fa-solid fa-credit-card" aria-hidden="true"></i>
+                    <div>
+                        <h3 class="beneficio__title">Parcelamento</h3>
+                        <p class="beneficio__text">Pix, boleto ou cartão em até 6x</p>
+                    </div>
+                </div>
+                <div class="beneficio__item">
+                    <i class="beneficio__icon fa-solid fa-rotate-left" aria-hidden="true"></i>
+                    <div>
+                        <h3 class="beneficio__title">Troca em 7 dias</h3>
+                        <p class="beneficio__text">Arrependimento sem complicação</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ ==================== -->
+        <section class="faq section" id="faq">
+            <div class="container faq__container">
+                <div class="faq__intro">
+                    <h2 class="section__title">Dúvidas frequentes</h2>
+                    <p class="section__description">O que costuma ser perguntado antes da primeira compra. Se não achar a resposta, chame a gente.</p>
+                    <a href="#contato" class="btn btn--outline">Falar com a loja</a>
+                </div>
+
+                <div class="faq__list">
+                    <div class="faq__item active">
+                        <button class="faq__question" type="button" aria-expanded="true" aria-controls="faq-1">
+                            <h3 class="faq__title">Como escolho o tamanho da barraca?</h3>
+                            <span class="faq__toggle"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </button>
+                        <div class="faq__answer" id="faq-1"><div>
+                            <p>Some uma pessoa à capacidade que você precisa para a bagagem. Uma barraca para 2 pessoas serve bem para uma pessoa com mochila e equipamento de pesca. Em dúvida, escolha o modelo maior.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-2">
+                            <h3 class="faq__title">Qual o prazo de entrega?</h3>
+                            <span class="faq__toggle"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </button>
+                        <div class="faq__answer" id="faq-2"><div>
+                            <p>O prazo depende do seu CEP e aparece no carrinho antes de você pagar. Pedidos aprovados até o meio-dia saem no mesmo dia útil.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-3">
+                            <h3 class="faq__title">Quais formas de pagamento são aceitas?</h3>
+                            <span class="faq__toggle"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </button>
+                        <div class="faq__answer" id="faq-3"><div>
+                            <p>Pix, boleto e cartão de crédito em até 6x. O pagamento é processado em ambiente seguro e a loja não armazena os dados do seu cartão.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-4">
+                            <h3 class="faq__title">Posso trocar ou devolver um produto?</h3>
+                            <span class="faq__toggle"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </button>
+                        <div class="faq__answer" id="faq-4"><div>
+                            <p>Sim. Você tem 7 dias após o recebimento para desistir da compra, com o produto sem uso e na embalagem original. Defeitos de fabricação têm garantia à parte.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-5">
+                            <h3 class="faq__title">Os produtos têm garantia?</h3>
+                            <span class="faq__toggle"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </button>
+                        <div class="faq__answer" id="faq-5"><div>
+                            <p>Todos os produtos têm garantia contra defeito de fabricação, com prazo indicado na página de cada item. Guarde a nota fiscal para acionar o suporte.</p>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <div class="footer__container">
+                <div>
+                    <a href="#inicio" class="nav__logo footer__logo" aria-label="Cabana do Pescador, voltar ao topo">
+                        <svg class="nav__logo-mark" viewBox="0 0 36 36" aria-hidden="true">
+                            <rect width="36" height="36" rx="2" fill="#ff6a13"/>
+                            <polygon points="18,8 29,27 7,27" fill="#121212"/>
+                            <polygon points="18,16 13.5,27 22.5,27" fill="#ff6a13"/>
+                        </svg>
+                        <span><strong>Cabana</strong> do Pescador</span>
+                    </a>
+                    <p class="footer__description">Equipamento outdoor e camping para quem passa o fim de semana na água e na mata.</p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                        <a href="#" class="footer__social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer__title">Loja</h4>
+                    <ul class="footer__links">
+                        <li><a href="#categorias" class="footer__link">Categorias</a></li>
+                        <li><a href="#beneficios" class="footer__link">Entrega e pagamento</a></li>
+                        <li><a href="#faq" class="footer__link">Dúvidas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer__title">Ajuda</h4>
+                    <ul class="footer__links">
+                        <li><a href="#faq" class="footer__link">Trocas e devoluções</a></li>
+                        <li><a href="#faq" class="footer__link">Garantia</a></li>
+                        <li><a href="#faq" class="footer__link">Formas de pagamento</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer__title">Contato</h4>
+                    <ul class="footer__info">
+                        <li class="footer__info-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:contato@cabanadopescador.com.br" class="footer__link">contato@cabanadopescador.com.br</a></li>
+                        <li class="footer__info-item"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><a href="#" class="footer__link">(00) 00000-0000</a></li>
+                        <li class="footer__info-item"><i class="fa-solid fa-clock" aria-hidden="true"></i><span>Seg a sex, 9h às 18h</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copy">&copy; <span id="year">2026</span> Cabana do Pescador. Loja fictícia criada para portfólio.</p>
+                <div class="footer__bottom-links">
+                    <a href="#" class="footer__bottom-link">Privacidade</a>
+                    <a href="#" class="footer__bottom-link">Termos de uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#inicio" class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
