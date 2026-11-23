@@ -32,6 +32,7 @@
                 <ul class="nav__list">
                     <li><a href="#inicio" class="nav__link active-link">Início</a></li>
                     <li><a href="#categorias" class="nav__link">Categorias</a></li>
+                    <li><a href="#vitrine" class="nav__link">Produtos</a></li>
                     <li><a href="#faq" class="nav__link">Dúvidas</a></li>
                     <li><a href="#contato" class="nav__link">Contato</a></li>
                 </ul>
@@ -41,8 +42,7 @@
             </div>
 
             <div class="nav__actions">
-                <!-- Etapa 2: este botão vai abrir o carrinho -->
-                <button class="nav__cart" id="cart-toggle" type="button" aria-label="Carrinho, 0 itens">
+                <button class="nav__cart" id="cart-toggle" type="button" aria-label="Carrinho, 0 itens" aria-haspopup="dialog" aria-expanded="false" aria-controls="cart-drawer">
                     <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
                     <span class="nav__cart-count" id="cart-count" aria-hidden="true">0</span>
                 </button>
@@ -94,7 +94,6 @@
         </section>
 
         <!-- ==================== CATEGORIAS ==================== -->
-        <!-- Etapa 2: a vitrine de produtos (#vitrine) entra logo abaixo desta seção -->
         <section class="categorias section" id="categorias">
             <div class="container">
                 <div class="section__header">
@@ -140,6 +139,31 @@
                         <span class="categoria__cta">Ver produtos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
                     </a>
                 </div>
+            </div>
+        </section>
+
+        <!-- ==================== VITRINE ==================== -->
+        <section class="vitrine section" id="vitrine">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Vitrine</h2>
+                    <p class="section__description">Filtre por categoria e escolha o que vai na mala.</p>
+                </div>
+
+                <div class="vitrine__toolbar">
+                    <div class="vitrine__filtros" id="vitrine-filtros" role="group" aria-label="Filtrar por categoria"></div>
+                    <div class="vitrine__ordenar">
+                        <label for="vitrine-ordenar">Ordenar por</label>
+                        <select id="vitrine-ordenar" class="vitrine__select">
+                            <option value="padrao">Padrão</option>
+                            <option value="menor">Menor preço</option>
+                            <option value="maior">Maior preço</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="vitrine__contador" id="vitrine-contador" aria-live="polite"></p>
+
+                <div class="vitrine__grid" id="vitrine-grid"></div>
             </div>
         </section>
 
@@ -297,10 +321,87 @@
         </div>
     </footer>
 
+    <!-- ==================== MODAL: QUICK VIEW ==================== -->
+    <div class="modal" id="quick-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="quick-title" tabindex="-1">
+            <button class="modal__close" type="button" data-modal-close aria-label="Fechar detalhes do produto">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <div id="quick-content"></div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: CHECKOUT ==================== -->
+    <div class="modal modal--checkout" id="checkout-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="checkout-title" tabindex="-1">
+            <button class="modal__close" type="button" data-modal-close aria-label="Fechar checkout">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <div id="checkout-body"></div>
+        </div>
+    </div>
+
+    <!-- ==================== CARRINHO (GAVETA) ==================== -->
+    <div class="cart__overlay" id="cart-overlay"></div>
+    <aside class="cart" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
+        <header class="cart__header">
+            <h2 class="cart__title" id="cart-title">Carrinho <span id="cart-title-count"></span></h2>
+            <button class="cart__close" id="cart-close" type="button" aria-label="Fechar carrinho">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </header>
+
+        <div class="cart__shipping">
+            <p class="cart__shipping-text" id="cart-shipping-text" aria-live="polite"></p>
+            <div class="cart__bar" id="cart-bar" role="progressbar" aria-label="Progresso para o frete grátis" aria-valuemin="0" aria-valuemax="150" aria-valuenow="0">
+                <span class="cart__bar-fill" id="cart-bar-fill"></span>
+            </div>
+        </div>
+
+        <div class="cart__body">
+            <ul class="cart__list" id="cart-list"></ul>
+            <div class="cart__empty" id="cart-empty" hidden>
+                <i class="fa-solid fa-campground" aria-hidden="true"></i>
+                <p>Seu carrinho está vazio.</p>
+                <a href="#vitrine" class="btn btn--outline" data-cart-close>Ver produtos</a>
+            </div>
+        </div>
+
+        <footer class="cart__footer" id="cart-footer" hidden>
+            <dl class="cart__summary">
+                <div class="cart__row" id="cart-savings-row" hidden>
+                    <dt>Você economiza</dt>
+                    <dd id="cart-savings"></dd>
+                </div>
+                <div class="cart__row">
+                    <dt>Frete</dt>
+                    <dd id="cart-shipping-value"></dd>
+                </div>
+                <div class="cart__row cart__row--total">
+                    <dt>Subtotal</dt>
+                    <dd id="cart-subtotal"></dd>
+                </div>
+            </dl>
+            <button class="btn btn--primary cart__checkout" id="cart-checkout" type="button">Finalizar compra</button>
+            <div class="cart__actions">
+                <button class="cart__link" type="button" data-cart-close>Continuar comprando</button>
+                <button class="cart__link" type="button" id="cart-clear">Esvaziar carrinho</button>
+            </div>
+        </footer>
+    </aside>
+
     <a href="#inicio" class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
         <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </a>
 
+    <script src="utils.js"></script>
+    <script src="products.js"></script>
+    <script src="cart.js"></script>
+    <script src="quickview.js"></script>
+    <script src="checkout.js"></script>
+    <script src="app.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

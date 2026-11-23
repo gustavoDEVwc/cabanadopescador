@@ -8,8 +8,6 @@ const navClose    = document.getElementById('nav-close');
 const navOverlay  = document.getElementById('nav-overlay');
 const navLinks    = document.querySelectorAll('.nav__link');
 const scrollTop   = document.getElementById('scroll-top');
-const cartToggle  = document.getElementById('cart-toggle');
-const cartCount   = document.getElementById('cart-count');
 
 /* ==================== MENU MOBILE ==================== */
 function setMenu(open, returnFocus = false) {
@@ -83,16 +81,6 @@ faqItems.forEach(item => {
         }
     });
 });
-
-/* ==================== CARRINHO (gancho para a Etapa 2) ==================== */
-// Por enquanto só atualiza o contador do header. A lógica real
-// (adicionar, remover, somar, salvar) entra na Etapa 2.
-function updateCartBadge(total = 0) {
-    cartCount.textContent = total;
-    cartCount.classList.toggle('is-filled', total > 0);
-    cartToggle.setAttribute('aria-label', `Carrinho, ${total} ${total === 1 ? 'item' : 'itens'}`);
-}
-updateCartBadge(0);
 
 /* ==================== RODAPÉ ==================== */
 document.getElementById('year').textContent = new Date().getFullYear();

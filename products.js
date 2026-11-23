@@ -1,17 +1,20 @@
 /* ==================== CATÁLOGO ====================
-   Única fonte de dados da loja. O app.js lê este arquivo e monta
-   filtros e cards sozinho: para adicionar um produto, basta copiar
-   um objeto abaixo e trocar os valores.
+   Única fonte de dados da loja. Vitrine, modal, carrinho e checkout
+   leem tudo daqui: para adicionar um produto, copie um objeto abaixo
+   e troque os valores.
 
    Campos de cada produto:
-   - id                 identificador único (usado no carrinho depois)
+   - id                 identificador único
    - nome               título do card
    - categoria          slug igual ao data-category dos tiles do index.html
    - preco              preço cheio, em reais (número, não texto)
    - precoPromocional   preço com desconto, ou null se não houver
-   - variacao           peso, capacidade ou tamanho (texto curto)
+   - variacao           peso, capacidade ou tamanho (texto curto, fixo do produto)
    - descricao          uma frase de até ~110 caracteres
-   - imagens            lista de URLs; o card usa a primeira
+   - detalhes           lista de características (aparece no modal)
+   - opcao              (opcional) escolha do cliente: { rotulo: 'Cor', valores: [...] }
+                        Se o produto não tiver variação, simplesmente omita
+   - imagens            lista de URLs; o card usa a primeira, o modal mostra todas
 */
 
 const CATEGORIAS = [
@@ -25,8 +28,8 @@ const CATEGORIAS = [
 
 /* Fotos de placeholder (Unsplash). São paisagens do universo outdoor,
    não fotos literais de cada produto. Para trocar uma foto, mude só o
-   ID aqui; os produtos pegam daqui. Se um ID sair do ar, o app.js
-   mostra uma imagem ilustrada no lugar. */
+   ID aqui; os produtos pegam daqui. Se um ID sair do ar, o app mostra
+   uma imagem ilustrada no lugar. */
 const FOTOS = {
     barracas:    ['1504280390367-361c6d9f38f4', '1478131143081-80f7f84ca84d', '1537905569824-f89f14cceb68'],
     pesca:       ['1439066615861-d1af74d74000', '1501785888041-af3ef285b470', '1500375592092-40eb2168fd21'],
@@ -51,6 +54,13 @@ const PRODUTOS = [
         precoPromocional: 379.90,
         variacao: '3 pessoas · 3,8 kg',
         descricao: 'Sobreteto com coluna d’água de 2000 mm e montagem em dois arcos de fibra.',
+        detalhes: [
+            'Coluna d’água: 2000 mm no sobreteto e 5000 mm no piso',
+            'Duas entradas com mosquiteiro',
+            'Montagem em cerca de 5 minutos',
+            'Acompanha bolsa de transporte e kit de estacas'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Verde musgo', 'Cinza grafite'] },
         imagens: [foto('barracas', 0), foto('barracas', 1)]
     },
     {
@@ -61,6 +71,13 @@ const PRODUTOS = [
         precoPromocional: null,
         variacao: '2 pessoas · 2,1 kg',
         descricao: 'Estrutura de alumínio e tecido ripstop. Cabe na lateral da mochila cargueira.',
+        detalhes: [
+            'Varetas de alumínio e tecido ripstop de 20D',
+            'Dimensão fechada: 42 × 14 cm',
+            'Abside lateral para guardar mochilas',
+            'Fitas refletivas nos cabos de estaiamento'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Verde oliva', 'Laranja'] },
         imagens: [foto('barracas', 1), foto('barracas', 2)]
     },
     {
@@ -71,6 +88,13 @@ const PRODUTOS = [
         precoPromocional: 99.90,
         variacao: '3 × 3 m · 480 g',
         descricao: 'Cobertura rápida para chuva e sol, com ilhoses reforçados e cordas inclusas.',
+        detalhes: [
+            'Oito pontos de ancoragem com ilhoses de metal',
+            'Poliéster com revestimento impermeável',
+            'Fator de proteção solar UPF 50+',
+            'Acompanha 4 cordas e 6 estacas'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Verde', 'Areia'] },
         imagens: [foto('barracas', 2), foto('barracas', 0)]
     },
 
@@ -83,6 +107,13 @@ const PRODUTOS = [
         precoPromocional: 189.90,
         variacao: '1,80 m · 230 g',
         descricao: 'Ação rápida para tilápia e traíra. Recolhida, fica com 60 cm e cabe em qualquer mala.',
+        detalhes: [
+            'Blank em fibra de carbono, 5 seções telescópicas',
+            'Capacidade de linha: 8 a 17 lb',
+            'Cabo em EVA com porta-molinete de rosca',
+            'Acompanha capa de transporte'
+        ],
+        opcao: { rotulo: 'Ação', valores: ['Rápida', 'Média'] },
         imagens: [foto('pesca', 0), foto('pesca', 1)]
     },
     {
@@ -93,6 +124,13 @@ const PRODUTOS = [
         precoPromocional: null,
         variacao: 'Tamanho 3000 · 290 g',
         descricao: 'Corpo em alumínio, freio progressivo e recolhimento suave de 5,2:1.',
+        detalhes: [
+            '6 rolamentos de aço inox mais 1 anti-retorno',
+            'Freio de arraste de até 8 kg',
+            'Carretel de alumínio com recolhimento de 5,2:1',
+            'Manivela reversível, acompanha carretel reserva'
+        ],
+        opcao: { rotulo: 'Manivela', valores: ['Destro', 'Canhoto'] },
         imagens: [foto('pesca', 1), foto('pesca', 2)]
     },
     {
@@ -103,6 +141,13 @@ const PRODUTOS = [
         precoPromocional: 69.90,
         variacao: '24 peças · 320 g',
         descricao: 'Sapinhos, shads e meia-águas em cores variadas, organizados em maleta com divisórias.',
+        detalhes: [
+            '24 iscas entre sapinhos, shads e meia-águas',
+            'Anzóis de aço carbono já montados',
+            'Maleta com divisórias removíveis',
+            'Indicado para água doce'
+        ],
+        opcao: { rotulo: 'Cores', valores: ['Naturais', 'Vibrantes'] },
         imagens: [foto('pesca', 2), foto('pesca', 0)]
     },
 
@@ -115,6 +160,13 @@ const PRODUTOS = [
         precoPromocional: 109.90,
         variacao: '800 lm · 95 g',
         descricao: 'Três níveis de brilho, luz vermelha para o acampamento e bateria USB-C.',
+        detalhes: [
+            'Três níveis de brilho e modo estroboscópico',
+            'Luz vermelha para não ofuscar o grupo',
+            'Bateria de lítio com carga via USB-C',
+            'Resistente a respingos (IPX4)'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Preto', 'Laranja'] },
         imagens: [foto('iluminacao', 0), foto('iluminacao', 1)]
     },
     {
@@ -125,6 +177,13 @@ const PRODUTOS = [
         precoPromocional: null,
         variacao: '600 lm · 410 g',
         descricao: 'Ilumina a barraca inteira, tem gancho para pendurar e serve de carregador de celular.',
+        detalhes: [
+            'Luz de 360° com intensidade regulável',
+            'Autonomia de até 20 horas no modo baixo',
+            'Saída USB para carregar o celular',
+            'Gancho retrátil e base antiderrapante'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Preto', 'Verde'] },
         imagens: [foto('iluminacao', 1), foto('iluminacao', 2)]
     },
     {
@@ -135,6 +194,13 @@ const PRODUTOS = [
         precoPromocional: 94.90,
         variacao: '1000 lm · 210 g',
         descricao: 'Foco ajustável de 50 a 300 m, resistente a respingos e com corpo antiderrapante.',
+        detalhes: [
+            'Corpo em alumínio aeronáutico anodizado',
+            'Zoom ajustável de foco aberto a foco fechado',
+            'Cinco modos de iluminação',
+            'Acompanha bateria 18650, carregador USB e cordão'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Preto', 'Cinza'] },
         imagens: [foto('iluminacao', 2), foto('iluminacao', 0)]
     },
 
@@ -147,6 +213,13 @@ const PRODUTOS = [
         precoPromocional: 329.90,
         variacao: '60 L · 1,9 kg',
         descricao: 'Costas ventiladas, cinto lombar acolchoado e capa de chuva embutida.',
+        detalhes: [
+            'Sistema de costas ventilado e regulável',
+            'Cinto lombar e peitoral acolchoados',
+            'Capa de chuva embutida no fundo',
+            'Entrada pela frente e compartimento inferior para o saco de dormir'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Verde', 'Preto'] },
         imagens: [foto('mochilas', 0), foto('mochilas', 1)]
     },
     {
@@ -155,8 +228,15 @@ const PRODUTOS = [
         categoria: 'mochilas',
         preco: 149.90,
         precoPromocional: null,
-        variacao: '20 L · 380 g · Laranja',
+        variacao: '20 L · 380 g',
         descricao: 'PVC com costura soldada e fecho roll-top. Mantém roupa e documentos secos no barco.',
+        detalhes: [
+            'PVC 500D com costuras soldadas a alta frequência',
+            'Fecho roll-top: submersão momentânea sem entrada de água',
+            'Alças de ombro destacáveis',
+            'Flutua e não retém odores'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Laranja', 'Preto', 'Amarelo'] },
         imagens: [foto('mochilas', 1), foto('mochilas', 2)]
     },
     {
@@ -167,6 +247,13 @@ const PRODUTOS = [
         precoPromocional: 169.90,
         variacao: '12 L · reservatório 2 L · 650 g',
         descricao: 'Compacta para caminhadas curtas, com bolso frontal e mangueira com válvula de mordida.',
+        detalhes: [
+            'Reservatório de 2 L com abertura ampla para limpeza',
+            'Mangueira isolada com válvula de mordida',
+            'Bolso frontal elástico e bolsos laterais com zíper',
+            'Costas em malha respirável'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Preto', 'Cinza'] },
         imagens: [foto('mochilas', 2), foto('mochilas', 0)]
     },
 
@@ -179,6 +266,12 @@ const PRODUTOS = [
         precoPromocional: 79.90,
         variacao: '180 g · acompanha estojo',
         descricao: 'Encaixe direto em cartucho de gás, chama regulável e suportes dobráveis.',
+        detalhes: [
+            'Encaixe de rosca em cartuchos de gás butano/propano',
+            'Chama regulável com acendimento manual',
+            'Suportes dobráveis para panelas de até 18 cm',
+            'Dobrado ocupa o espaço de uma lata de refrigerante'
+        ],
         imagens: [foto('cozinha', 0), foto('cozinha', 1)]
     },
     {
@@ -189,6 +282,12 @@ const PRODUTOS = [
         precoPromocional: null,
         variacao: '7 peças · 1,1 kg',
         descricao: 'Duas panelas, frigideira, tampa e talheres encaixados em uma só peça de transporte.',
+        detalhes: [
+            'Duas panelas, frigideira, tampa e dois talheres',
+            'Alumínio anodizado com revestimento antiaderente',
+            'Cabos dobráveis em silicone',
+            'Todas as peças se encaixam na maior'
+        ],
         imagens: [foto('cozinha', 1), foto('cozinha', 2)]
     },
     {
@@ -199,6 +298,13 @@ const PRODUTOS = [
         precoPromocional: 119.00,
         variacao: '1 L · 520 g',
         descricao: 'Parede dupla a vácuo: mantém bebida quente por 12 horas e gelada por 24.',
+        detalhes: [
+            'Inox 304 com parede dupla a vácuo',
+            'Quente por 12 horas, gelada por 24',
+            'Tampa que serve de copo',
+            'Boca larga, aceita gelo em cubos'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Inox', 'Preto fosco'] },
         imagens: [foto('cozinha', 2), foto('cozinha', 0)]
     },
 
@@ -211,6 +317,13 @@ const PRODUTOS = [
         precoPromocional: 129.90,
         variacao: 'Lâmina 10 cm · 240 g',
         descricao: 'Aço inox 7Cr17, cabo emborrachado e bainha de nylon com passador de cinto.',
+        detalhes: [
+            'Lâmina de aço inox 7Cr17 com espiga inteira',
+            'Cabo emborrachado antiderrapante',
+            'Bainha de nylon com passador de cinto',
+            'Comprimento total de 21 cm'
+        ],
+        opcao: { rotulo: 'Cabo', valores: ['Preto', 'Verde'] },
         imagens: [foto('ferramentas', 0), foto('ferramentas', 1)]
     },
     {
@@ -221,6 +334,12 @@ const PRODUTOS = [
         precoPromocional: null,
         variacao: 'Cabo 35 cm · 780 g',
         descricao: 'Cabeça forjada em aço carbono para rachar lenha miúda, com capa de proteção.',
+        detalhes: [
+            'Cabeça forjada em aço carbono',
+            'Cabo de fibra com revestimento de borracha',
+            'Capa de couro sintético para a lâmina',
+            'Ideal para lenha miúda e preparo do acampamento'
+        ],
         imagens: [foto('ferramentas', 1), foto('ferramentas', 2)]
     },
     {
@@ -231,6 +350,13 @@ const PRODUTOS = [
         precoPromocional: 89.90,
         variacao: '12 funções · 130 g',
         descricao: 'Lâmina, serra, abridor, chave de fenda e alicate em um corpo de aço inox.',
+        detalhes: [
+            'Lâmina, serra, abridor de lata e garrafa',
+            'Alicate, chaves de fenda e lima',
+            'Corpo em aço inox com travas de segurança',
+            'Acompanha estojo de nylon'
+        ],
+        opcao: { rotulo: 'Cor', valores: ['Prata', 'Preto'] },
         imagens: [foto('ferramentas', 2), foto('ferramentas', 0)]
     }
 ];
