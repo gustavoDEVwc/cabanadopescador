@@ -1109,18 +1109,18 @@ button {
 .produto__media {
     display: block;
     width: 100%;
-    padding: 0;
+    padding: 12px;
     cursor: pointer;
     position: relative;
     aspect-ratio: 4 / 3;
-    background: var(--surface-2);
+    background: white;
     overflow: hidden;
 }
 
 .produto__media img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.5s var(--ease-out);
 }
 
@@ -1635,7 +1635,9 @@ button {
 .quick__main img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 12px;
+    background-color: white;
 }
 
 .quick__thumbs {
@@ -1658,7 +1660,8 @@ button {
 .quick__thumb img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: white;
 }
 
 .quick__thumb:hover {
